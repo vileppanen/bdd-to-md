@@ -2,6 +2,9 @@
   "name": "bdd-to-md",
   "version": "0.0.1",
   "description": "Tool for generating markdown out of feature specs written in Gherkin",
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
   "main": "generate-docs/index.js",
   "bin": "cli.js",
   "scripts": {
