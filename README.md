@@ -1,6 +1,6 @@
 # bdd-to-md
 
-This cli tool scans specifed folder for BDD feature spec files, written in Gherkin, and generates a markdown file out of them.
+This cli tool scans specified folder for BDD feature spec files, written in Gherkin, and generates a markdown file out of them.
 
 ## Dependencies
 
