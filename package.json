@@ -1,5 +1,5 @@
 {
-  "name": "bdd-to-md",
+  "name": "@vileppanen/bdd-to-md",
   "version": "0.0.1",
   "description": "Tool for generating markdown out of feature specs written in Gherkin",
   "publishConfig": {

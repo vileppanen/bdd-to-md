@@ -14,7 +14,7 @@ const options = commandLineArgs(optionDefinitions)
 if (!options.featuresPath) throw new Error('featuresPath argument not provided')
 if (!options.markdownFilePath) throw new Error('markdownFilePath argument not provided')
 
-const featuresPath = path.join(__dirname, options.featuresPath)
-const mdFilePath = path.join(__dirname, options.markdownFilePath)
+const featuresPath = path.join(options.featuresPath)
+const mdFilePath = path.join(options.markdownFilePath)
 
 generateMarkdown(featuresPath, mdFilePath)
