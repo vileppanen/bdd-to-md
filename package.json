@@ -1,0 +1,30 @@
+{
+  "name": "bdd-to-md",
+  "version": "1.0.0",
+  "description": "Tool for generating markdown out of feature specs written in Gherkin",
+  "main": "index.js",
+  "bin": "cli.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vileppanen/bdd-to-md.git"
+  },
+  "keywords": [
+    "bdd"
+  ],
+  "author": "Ville Leppänen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vileppanen/bdd-to-md/issues"
+  },
+  "homepage": "https://github.com/vileppanen/bdd-to-md#readme",
+  "peerDependencies": {
+    "gherkin": "^9.0.0"
+  },
+  "dependencies": {
+    "command-line-args": "^5.1.1",
+    "gherkin": "^9.0.0"
+  }
+}
