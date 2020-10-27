@@ -40,7 +40,6 @@ const handleBackground = background => {
 }
 
 const handleScenario = scenario => {
-  console.log(scenario)
   markdownLines = [
     ...markdownLines,
     '\n',
@@ -53,13 +52,12 @@ const generateMarkdown = async (featuresDir, outputFilePath) => {
 
   const files = await readFiles(featuresDir)
   const stream = gherkin.fromPaths(files.map(file => `${featuresDir}/${file}`))
-  // Pipe the stream to another stream that can read messages.
   stream.on('data', (chunk) => {
     handleFeature(chunk)
   })
   stream.on('end', async () => {
     fs.writeFile(outputFilePath, markdownLines.join('\n'), () => {
-      console.log('Document written')
+      console.log(`Feature specs written to ${outputFilePath}`)
     })
   })
 }
