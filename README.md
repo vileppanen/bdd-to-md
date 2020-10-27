@@ -15,3 +15,9 @@ Example:
 ```bash
 bdd-to-md --featuresPath features --markdownFilePath FEATURES.md
 ```
+
+or, by using aliases in arguments
+
+```bash
+bdd-to-md -f features -m FEATURES.md
+```
