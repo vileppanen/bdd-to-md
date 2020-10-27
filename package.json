@@ -1,8 +1,8 @@
 {
   "name": "bdd-to-md",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "Tool for generating markdown out of feature specs written in Gherkin",
-  "main": "index.js",
+  "main": "generate-docs/index.js",
   "bin": "cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
