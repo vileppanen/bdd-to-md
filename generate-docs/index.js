@@ -2,11 +2,6 @@ const gherkin = require('gherkin').default
 const fs = require('fs')
 const { readFiles } = require('./read-files')
 
-const options = {
-  includeSource: true,
-  includeGherkinDocument: true,
-  includePickles: true
-}
 let markdownLines = []
 
 const handleFeature = ({ gherkinDocument }) => {
