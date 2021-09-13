@@ -8,7 +8,8 @@
   "main": "generate-docs/index.js",
   "bin": "cli.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "standard",
+    "test": "nyc mocha tests/**/*.test.js --require tests/setupTests.js"
   },
   "repository": {
     "type": "git",
@@ -29,5 +30,24 @@
   "dependencies": {
     "command-line-args": "^5.1.1",
     "gherkin": "^9.0.0"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "fast-check": "^2.17.0",
+    "mocha": "^9.1.1",
+    "nyc": "^15.1.0",
+    "sinon": "^11.1.2",
+    "sinon-chai": "^3.7.0",
+    "standard": "^16.0.3"
+  },
+  "standard": {
+    "globals": [
+      "describe",
+      "beforeEach",
+      "afterEach",
+      "it",
+      "expect",
+      "sinon"
+    ]
   }
 }

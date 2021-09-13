@@ -8,7 +8,7 @@ const readFiles = directory => {
         reject('Failed to read directory', err)
       }
       resolve(files)
-    });
+    })
   })
 }
 
