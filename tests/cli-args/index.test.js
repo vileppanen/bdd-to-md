@@ -41,12 +41,12 @@ describe(TESTED_MODULE, () => {
     })
   })
   describe('#getMarkDownFilePath', () => {
-    describe('- when markDownFilePath argument is provided', () => {
-      let markDownFilePathArg
+    describe('- when markdownFilePath argument is provided', () => {
+      let markdownFilePathArg
       beforeEach(() => {
-        markDownFilePathArg = 'foo/bar///jar'
+        markdownFilePathArg = 'foo/bar///jar'
         sinon.stub(libs, 'commandLineArgs').returns({
-          markdownFilePath: markDownFilePathArg
+          markdownFilePath: markdownFilePathArg
         })
         sinon.stub(path, 'normalize').returns('normalized-path')
       })
@@ -55,11 +55,11 @@ describe(TESTED_MODULE, () => {
       })
       it('returns the normalized argument value', () => {
         const result = mod.getMarkDownFilePath()
-        expect(path.normalize).to.have.been.calledWith(markDownFilePathArg)
+        expect(path.normalize).to.have.been.calledWith(markdownFilePathArg)
         expect(result).to.equal('normalized-path')
       })
     })
-    describe('- when markDownFilePath argument not provided', () => {
+    describe('- when markdownFilePath argument not provided', () => {
       beforeEach(() => {
         sinon.stub(libs, 'commandLineArgs').returns({
           someOtherPath: 'foobar'
@@ -69,7 +69,7 @@ describe(TESTED_MODULE, () => {
         sinon.restore()
       })
       it('throws error', () => {
-        expect(() => mod.getMarkDownFilePath()).to.throw('markDownFilePath argument not provided')
+        expect(() => mod.getMarkDownFilePath()).to.throw('markdownFilePath argument not provided')
       })
     })
   })
