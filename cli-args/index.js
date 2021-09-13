@@ -11,7 +11,7 @@ const getFeaturesPath = () => {
   if (!args.featuresPath) throw new Error('featuresPath argument not provided')
   return normalizedPath(args.featuresPath)
 }
-const getMarkDownFilePath = () => {
+const getMarkdownFilePath = () => {
   const args = libs.commandLineArgs(argumentDefinitions)
   if (!args.markdownFilePath) throw new Error('markdownFilePath argument not provided')
   return normalizedPath(args.markdownFilePath)
@@ -20,5 +20,5 @@ const normalizedPath = pathToDir => path.normalize(pathToDir)
 
 module.exports = {
   getFeaturesPath,
-  getMarkDownFilePath
+  getMarkdownFilePath
 }

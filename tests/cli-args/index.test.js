@@ -40,7 +40,7 @@ describe(TESTED_MODULE, () => {
       })
     })
   })
-  describe('#getMarkDownFilePath', () => {
+  describe('#getMarkdownFilePath', () => {
     describe('- when markdownFilePath argument is provided', () => {
       let markdownFilePathArg
       beforeEach(() => {
@@ -54,7 +54,7 @@ describe(TESTED_MODULE, () => {
         sinon.restore()
       })
       it('returns the normalized argument value', () => {
-        const result = mod.getMarkDownFilePath()
+        const result = mod.getMarkdownFilePath()
         expect(path.normalize).to.have.been.calledWith(markdownFilePathArg)
         expect(result).to.equal('normalized-path')
       })
@@ -69,7 +69,7 @@ describe(TESTED_MODULE, () => {
         sinon.restore()
       })
       it('throws error', () => {
-        expect(() => mod.getMarkDownFilePath()).to.throw('markdownFilePath argument not provided')
+        expect(() => mod.getMarkdownFilePath()).to.throw('markdownFilePath argument not provided')
       })
     })
   })
