@@ -1,5 +1,5 @@
 const path = require('path')
-const commandLineArgs = require('command-line-args')
+const libs = require('../libs')
 
 const argumentDefinitions = [
   { name: 'featuresPath', alias: 'f', type: String },
@@ -7,16 +7,16 @@ const argumentDefinitions = [
 ]
 
 const getFeaturesPath = () => {
-  const args = commandLineArgs(argumentDefinitions)
+  const args = libs.commandLineArgs(argumentDefinitions)
   if (!args.featuresPath) throw new Error('featuresPath argument not provided')
   return normalizedPath(args.featuresPath)
 }
 const getMarkDownFilePath = () => {
-  const args = commandLineArgs(argumentDefinitions)
+  const args = libs.commandLineArgs(argumentDefinitions)
   if (!args.markdownFilePath) throw new Error('markDownFilePath argument not provided')
   return normalizedPath(args.markdownFilePath)
 }
-const normalizedPath = pathToDir => path.join(pathToDir)
+const normalizedPath = pathToDir => path.normalize(pathToDir)
 
 module.exports = {
   getFeaturesPath,

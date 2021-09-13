@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { getFeaturesPath, getMarkDownFilePath } = require('./command-line-args')
+const { getFeaturesPath, getMarkDownFilePath } = require('./cli-args')
 const { generateMarkdown } = require('./generate-docs')
 
 const featuresPath = getFeaturesPath()
