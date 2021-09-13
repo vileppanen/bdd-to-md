@@ -1,8 +1,29 @@
 const gherkin = require('gherkin').default
 const fs = require('fs')
-const { readFiles } = require('./read-files')
+const readFiles = require('./read-files')
+const cliArgs = require('../cli-args')
 
 let markdownLines = []
+
+const queryArgumentsAndGenerateDocs = async () => {
+  const featuresPath = cliArgs.getFeaturesPath()
+  const mdFilePath = cliArgs.getMarkdownFilePath()
+
+  await generateMarkdown(featuresPath, mdFilePath)
+}
+
+const generateMarkdown = async (featuresDir, outputFilePath) => {
+  const files = await readFiles.readFiles(featuresDir)
+  const stream = gherkin.fromPaths(files.map(file => `${featuresDir}/${file}`))
+  stream.on('data', (chunk) => {
+    handleFeature(chunk)
+  })
+  stream.on('end', async () => {
+    fs.writeFile(outputFilePath, markdownLines.join('\n'), () => {
+      console.log(`Feature specs written to ${outputFilePath}`)
+    })
+  })
+}
 
 const handleFeature = ({ gherkinDocument }) => {
   if (gherkinDocument) {
@@ -43,17 +64,4 @@ const handleScenario = scenario => {
   ]
 }
 
-const generateMarkdown = async (featuresDir, outputFilePath) => {
-  const files = await readFiles(featuresDir)
-  const stream = gherkin.fromPaths(files.map(file => `${featuresDir}/${file}`))
-  stream.on('data', (chunk) => {
-    handleFeature(chunk)
-  })
-  stream.on('end', async () => {
-    fs.writeFile(outputFilePath, markdownLines.join('\n'), () => {
-      console.log(`Feature specs written to ${outputFilePath}`)
-    })
-  })
-}
-
-module.exports = { generateMarkdown }
+module.exports = { queryArgumentsAndGenerateDocs }

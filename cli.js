@@ -1,9 +1,4 @@
 #!/usr/bin/env node
+const { queryArgumentsAndGenerateDocs } = require('./generate-docs')
 
-const { getFeaturesPath, getMarkDownFilePath } = require('./cli-args')
-const { generateMarkdown } = require('./generate-docs')
-
-const featuresPath = getFeaturesPath()
-const mdFilePath = getMarkDownFilePath()
-
-generateMarkdown(featuresPath, mdFilePath)
+queryArgumentsAndGenerateDocs()
