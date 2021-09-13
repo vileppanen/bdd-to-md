@@ -5,7 +5,7 @@ const { readFiles } = require('./read-files')
 const options = {
   includeSource: true,
   includeGherkinDocument: true,
-  includePickles: true,
+  includePickles: true
 }
 let markdownLines = []
 
@@ -49,7 +49,6 @@ const handleScenario = scenario => {
 }
 
 const generateMarkdown = async (featuresDir, outputFilePath) => {
-
   const files = await readFiles(featuresDir)
   const stream = gherkin.fromPaths(files.map(file => `${featuresDir}/${file}`))
   stream.on('data', (chunk) => {
