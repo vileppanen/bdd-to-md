@@ -9,7 +9,7 @@
   "bin": "cli.js",
   "scripts": {
     "lint": "standard",
-    "test": "nyc mocha tests/**/*.test.js --require tests/setupTests.js"
+    "test": "nyc mocha \"tests/**/*.test.js\" --require tests/setupTests.js"
   },
   "repository": {
     "type": "git",
