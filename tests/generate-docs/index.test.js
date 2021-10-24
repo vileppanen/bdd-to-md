@@ -1,5 +1,5 @@
 const cliArgs = require('../../cli-args')
-const readFiles = require('../../generate-docs/read-files')
+const files = require('../../generate-docs/files')
 const gherkin = require('gherkin').default
 const TESTED_MODULE = 'generate-docs/index'
 describe(`${TESTED_MODULE}`, () => {
@@ -8,7 +8,7 @@ describe(`${TESTED_MODULE}`, () => {
     beforeEach(() => {
       sinon.stub(cliArgs, 'getFeaturesPath').returns('features-path')
       sinon.stub(cliArgs, 'getMarkdownFilePath').returns('markdown-file-path')
-      sinon.stub(readFiles, 'readFiles').resolves(['foo', 'bar', 'jar'])
+      sinon.stub(files, 'readFiles').resolves(['foo', 'bar', 'jar'])
       sinon.stub(gherkin, 'fromPaths').returns({
         on: sinon.stub()
       })
@@ -25,7 +25,7 @@ describe(`${TESTED_MODULE}`, () => {
     })
     it('should read the files from features path', async () => {
       await mod.queryArgumentsAndGenerateDocs()
-      expect(readFiles.readFiles).to.have.been.calledWith('features-path')
+      expect(files.readFiles).to.have.been.calledWith('features-path')
     })
     it('should build Gherkin documents from the files in features path', async () => {
       await mod.queryArgumentsAndGenerateDocs()
