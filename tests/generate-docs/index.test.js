@@ -1,10 +1,9 @@
 const cliArgs = require('../../cli-args')
 const files = require('../../generate-docs/files')
 const gherkin = require('gherkin').default
-const TESTED_MODULE = 'generate-docs/index'
-describe(`${TESTED_MODULE}`, () => {
+const mod = require('../../generate-docs/index')
+describe('generate-docs/index', () => {
   describe('#queryArgumentsAndGenerateDocs', () => {
-    let mod
     beforeEach(() => {
       sinon.stub(cliArgs, 'getFeaturesPath').returns('features-path')
       sinon.stub(cliArgs, 'getMarkdownFilePath').returns('markdown-file-path')
@@ -12,7 +11,6 @@ describe(`${TESTED_MODULE}`, () => {
       sinon.stub(gherkin, 'fromPaths').returns({
         on: sinon.stub()
       })
-      mod = require(`../../${TESTED_MODULE}`)
     })
     afterEach(() => sinon.restore())
     it('should query for features directory path', async () => {
