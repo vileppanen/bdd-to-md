@@ -9,7 +9,7 @@ const produceFrom = gherkinDocument => {
 }
 const convertFeature = ({ name, description = '' }) => ([
   `# ${name}`,
-  ...description.split('\n').map(line => line.trim())
+  ...description.split('\n').map(line => line.trim()).filter(line => line.length > 0)
 ])
 const convertChildren = (children = []) => children.map(convertChild).reduce((prevVal, currentVal) => ([...prevVal, ...currentVal]), [])
 

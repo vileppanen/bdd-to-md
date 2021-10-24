@@ -7,8 +7,7 @@ describe('generate-docs/convert/producers/md', () => {
       beforeEach(() => {
         gherkinDoc = {
           feature: {
-            name: 'Some feature',
-            description: 'some description line\nanother description line'
+            name: 'Some feature'
           }
         }
       })
@@ -16,10 +15,21 @@ describe('generate-docs/convert/producers/md', () => {
       it('should produce feature block lines in markdown', () => {
         const results = mod.produceFrom(gherkinDoc)
         expect(results).to.deep.equal([
-          '# Some feature',
-          'some description line',
-          'another description line'
+          '# Some feature'
         ])
+      })
+      describe('- and the spec has description', () => {
+        beforeEach(() => {
+          gherkinDoc.feature.description = 'some description line\nanother description line '
+        })
+        it('should produce feature block lines with description in markdown', () => {
+          const results = mod.produceFrom(gherkinDoc)
+          expect(results).to.deep.equal([
+            '# Some feature',
+            'some description line',
+            'another description line'
+          ])
+        })
       })
       describe('- and the spec contains background', () => {
         beforeEach(() => {
@@ -34,8 +44,6 @@ describe('generate-docs/convert/producers/md', () => {
           const results = mod.produceFrom(gherkinDoc)
           expect(results).to.deep.equal([
             '# Some feature',
-            'some description line',
-            'another description line',
             '**Some background**'
           ])
         })
@@ -55,8 +63,6 @@ describe('generate-docs/convert/producers/md', () => {
             const results = mod.produceFrom(gherkinDoc)
             expect(results).to.deep.equal([
               '# Some feature',
-              'some description line',
-              'another description line',
               '**Some background**',
               '* Given Some step'
             ])
@@ -77,8 +83,6 @@ describe('generate-docs/convert/producers/md', () => {
           const results = mod.produceFrom(gherkinDoc)
           expect(results).to.deep.equal([
             '# Some feature',
-            'some description line',
-            'another description line',
             '## Scenario: Some scenario'
           ])
         })
@@ -98,8 +102,6 @@ describe('generate-docs/convert/producers/md', () => {
             const results = mod.produceFrom(gherkinDoc)
             expect(results).to.deep.equal([
               '# Some feature',
-              'some description line',
-              'another description line',
               '## Scenario: Some scenario',
               '* Given Some step'
             ])
