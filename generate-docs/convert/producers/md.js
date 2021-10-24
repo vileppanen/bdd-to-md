@@ -16,6 +16,10 @@ const convertChildren = (children = []) => children.map(convertChild).reduce((pr
 const convertChild = child => {
   if (child.background) return convertBackground(child.background)
   if (child.scenario) return convertScenario(child.scenario)
+  else {
+    console.warn('Feature document child didn\'t contain any known data properties, ignoring')
+    return []
+  }
 }
 
 const convertBackground = ({ name, steps = [] }) => ([
