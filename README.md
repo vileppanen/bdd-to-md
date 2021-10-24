@@ -6,6 +6,10 @@ This cli tool scans specifed folder for BDD feature spec files, written in Gherk
 
 The package defines `gherkin` as a peer-dependency, so you need to install it separately in your project.
 
+## Install
+
+The package is published in Github packages. Follow the instructions in Github to authenticate yourself to GH packages & how to install the package from there.
+
 ## Usage
 
 Provide the generator command with a path containing the feature spec files, and the desired output filepath for the generated markdown.
