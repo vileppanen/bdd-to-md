@@ -10,6 +10,7 @@ describe('generate-docs/index', () => {
     beforeEach(() => {
       sinon.stub(cliArgs, 'getFeaturesPath').returns('features-path')
       sinon.stub(cliArgs, 'getOutputFilePath').returns('output-file-path')
+      sinon.stub(cliArgs, 'getConversionType').returns('conversion-type')
       sinon.stub(files, 'readFiles').resolves(['foo', 'bar', 'jar'])
       sinon.stub(files, 'writeFile').resolves()
       sinon.stub(gherkin, 'fromPaths').returns({
@@ -33,6 +34,10 @@ describe('generate-docs/index', () => {
       await mod.queryArgumentsAndGenerateDocs()
       expect(cliArgs.getOutputFilePath).to.have.been.called()
     })
+    it('should query for conversion type', async () => {
+      await mod.queryArgumentsAndGenerateDocs()
+      expect(cliArgs.getConversionType).to.have.been.called()
+    })
     it('should read the files from features path', async () => {
       await mod.queryArgumentsAndGenerateDocs()
       expect(files.readFiles).to.have.been.calledWith('features-path')
@@ -45,10 +50,10 @@ describe('generate-docs/index', () => {
         'features-path/jar'
       ])
     })
-    it('should convert the read Gherkin data into markdown', async () => {
+    it('should convert the read Gherkin data using the specified conversion type', async () => {
       await mod.queryArgumentsAndGenerateDocs()
       expect(convert.gherkin).to.have.been.calledWith('some-gherkin-data-chunk')
-      expect(mockConverter.to).to.have.been.calledWith('md')
+      expect(mockConverter.to).to.have.been.calledWith('conversion-type')
     })
     it('should write the converted output into a file', async () => {
       await mod.queryArgumentsAndGenerateDocs()

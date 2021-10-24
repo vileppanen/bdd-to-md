@@ -3,7 +3,8 @@ const libs = require('../libs')
 
 const argumentDefinitions = [
   { name: 'featuresPath', alias: 'f', type: String },
-  { name: 'outputFilePath', alias: 'o', type: String }
+  { name: 'outputFilePath', alias: 'o', type: String },
+  { name: 'conversionType', alias: 'c', type: String }
 ]
 
 const getFeaturesPath = () => {
@@ -18,7 +19,15 @@ const getOutputFilePath = () => {
 }
 const normalizedPath = pathToDir => path.normalize(pathToDir)
 
+const MD_CONVERSION_TYPE = 'md'
+const getConversionType = () => {
+  const args = libs.commandLineArgs(argumentDefinitions)
+  if (!args.conversionType) return MD_CONVERSION_TYPE
+  return args.conversionType
+}
+
 module.exports = {
   getFeaturesPath,
-  getOutputFilePath
+  getOutputFilePath,
+  getConversionType
 }
