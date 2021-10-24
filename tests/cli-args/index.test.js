@@ -1,12 +1,8 @@
 const path = require('path')
 const libs = require('../../libs')
 
-const TESTED_MODULE = 'cli-args'
-describe(TESTED_MODULE, () => {
-  let mod
-  beforeEach(() => {
-    mod = require(`../../${TESTED_MODULE}`)
-  })
+const mod = require('../../cli-args')
+describe('cli-args', () => {
   describe('#getFeaturesPath', () => {
     describe('- when featuresPath argument is provided', () => {
       let featuresPathArg
@@ -40,13 +36,13 @@ describe(TESTED_MODULE, () => {
       })
     })
   })
-  describe('#getMarkdownFilePath', () => {
-    describe('- when markdownFilePath argument is provided', () => {
-      let markdownFilePathArg
+  describe('#getOutputFilePath', () => {
+    describe('- when outputFilePath argument is provided', () => {
+      let outputFilePathArg
       beforeEach(() => {
-        markdownFilePathArg = 'foo/bar///jar'
+        outputFilePathArg = 'foo/bar///jar'
         sinon.stub(libs, 'commandLineArgs').returns({
-          markdownFilePath: markdownFilePathArg
+          outputFilePath: outputFilePathArg
         })
         sinon.stub(path, 'normalize').returns('normalized-path')
       })
@@ -54,12 +50,12 @@ describe(TESTED_MODULE, () => {
         sinon.restore()
       })
       it('returns the normalized argument value', () => {
-        const result = mod.getMarkdownFilePath()
-        expect(path.normalize).to.have.been.calledWith(markdownFilePathArg)
+        const result = mod.getOutputFilePath()
+        expect(path.normalize).to.have.been.calledWith(outputFilePathArg)
         expect(result).to.equal('normalized-path')
       })
     })
-    describe('- when markdownFilePath argument not provided', () => {
+    describe('- when outputFilePath argument not provided', () => {
       beforeEach(() => {
         sinon.stub(libs, 'commandLineArgs').returns({
           someOtherPath: 'foobar'
@@ -69,7 +65,7 @@ describe(TESTED_MODULE, () => {
         sinon.restore()
       })
       it('throws error', () => {
-        expect(() => mod.getMarkdownFilePath()).to.throw('markdownFilePath argument not provided')
+        expect(() => mod.getOutputFilePath()).to.throw('outputFilePath argument not provided')
       })
     })
   })

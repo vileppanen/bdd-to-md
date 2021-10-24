@@ -5,21 +5,21 @@ const cliArgs = require('../cli-args')
 
 const queryArgumentsAndGenerateDocs = async () => {
   const featuresPath = cliArgs.getFeaturesPath()
-  const mdFilePath = cliArgs.getMarkdownFilePath()
+  const outputFilePath = cliArgs.getOutputFilePath()
 
-  await generateMarkdown(featuresPath, mdFilePath)
+  await generateOutput(featuresPath, outputFilePath)
 }
 
-const generateMarkdown = async (featuresDir, outputFilePath) => {
-  let markdownLines = []
+const generateOutput = async (featuresDir, outputFilePath) => {
+  let outputLines = []
 
   const featureFiles = await files.readFiles(featuresDir)
   const stream = gherkin.fromPaths(featureFiles.map(file => `${featuresDir}/${file}`))
   stream.on('data', (chunk) => {
-    if (chunk.gherkinDocument) markdownLines = markdownLines.concat(convert.gherkin(chunk.gherkinDocument).to('md'))
+    if (chunk.gherkinDocument) outputLines = outputLines.concat(convert.gherkin(chunk.gherkinDocument).to('md'))
   })
   stream.on('end', async () => {
-    await files.writeFile(outputFilePath, markdownLines)
+    await files.writeFile(outputFilePath, outputLines)
   })
 }
 
