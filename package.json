@@ -1,6 +1,6 @@
 {
   "name": "@vileppanen/bdd-to-md",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Tool for transforming specs written in Gherkin into another format",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
