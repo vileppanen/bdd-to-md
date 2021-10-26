@@ -1,24 +1,7 @@
-const fs = require('fs')
+const fs = require('fs').promises
 
-const readFiles = directory => {
-  return new Promise((resolve, reject) => {
-    fs.readdir(directory, function (err, files) {
-      if (err) {
-        reject(new Error(err))
-      }
-      resolve(files)
-    })
-  })
-}
+const readFiles = async directory => fs.readdir(directory)
 
-const writeFile = (outputFilePath, stringArray) => {
-  return new Promise((resolve, reject) => {
-    fs.writeFile(outputFilePath, stringArray.join('\n'), err => {
-      if (err) reject(new Error(err))
-      resolve()
-      console.log(`Data written to ${outputFilePath}`)
-    })
-  })
-}
+const writeFile = async (outputFilePath, stringArray) => fs.writeFile(outputFilePath, stringArray.join('\n'))
 
 module.exports = { readFiles, writeFile }
