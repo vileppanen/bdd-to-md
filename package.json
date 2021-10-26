@@ -1,7 +1,7 @@
 {
   "name": "@vileppanen/bdd-to-md",
   "version": "0.0.3",
-  "description": "Tool for generating markdown out of feature specs written in Gherkin",
+  "description": "Tool for transforming specs written in Gherkin into another format",
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
   },
