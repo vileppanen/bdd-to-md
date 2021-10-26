@@ -3,7 +3,8 @@ const libs = require('../libs')
 
 const argumentDefinitions = [
   { name: 'featuresPath', alias: 'f', type: String },
-  { name: 'markdownFilePath', alias: 'm', type: String }
+  { name: 'outputFilePath', alias: 'o', type: String },
+  { name: 'conversionType', alias: 'c', type: String }
 ]
 
 const getFeaturesPath = () => {
@@ -11,14 +12,22 @@ const getFeaturesPath = () => {
   if (!args.featuresPath) throw new Error('featuresPath argument not provided')
   return normalizedPath(args.featuresPath)
 }
-const getMarkdownFilePath = () => {
+const getOutputFilePath = () => {
   const args = libs.commandLineArgs(argumentDefinitions)
-  if (!args.markdownFilePath) throw new Error('markdownFilePath argument not provided')
-  return normalizedPath(args.markdownFilePath)
+  if (!args.outputFilePath) throw new Error('outputFilePath argument not provided')
+  return normalizedPath(args.outputFilePath)
 }
 const normalizedPath = pathToDir => path.normalize(pathToDir)
 
+const MD_CONVERSION_TYPE = 'md'
+const getConversionType = () => {
+  const args = libs.commandLineArgs(argumentDefinitions)
+  if (!args.conversionType) return MD_CONVERSION_TYPE
+  return args.conversionType
+}
+
 module.exports = {
   getFeaturesPath,
-  getMarkdownFilePath
+  getOutputFilePath,
+  getConversionType
 }

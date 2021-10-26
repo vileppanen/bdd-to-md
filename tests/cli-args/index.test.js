@@ -1,12 +1,9 @@
 const path = require('path')
 const libs = require('../../libs')
 
-const TESTED_MODULE = 'cli-args'
-describe(TESTED_MODULE, () => {
-  let mod
-  beforeEach(() => {
-    mod = require(`../../${TESTED_MODULE}`)
-  })
+const mod = require('../../cli-args')
+const { expect } = require('chai')
+describe('cli-args', () => {
   describe('#getFeaturesPath', () => {
     describe('- when featuresPath argument is provided', () => {
       let featuresPathArg
@@ -40,13 +37,13 @@ describe(TESTED_MODULE, () => {
       })
     })
   })
-  describe('#getMarkdownFilePath', () => {
-    describe('- when markdownFilePath argument is provided', () => {
-      let markdownFilePathArg
+  describe('#getOutputFilePath', () => {
+    describe('- when outputFilePath argument is provided', () => {
+      let outputFilePathArg
       beforeEach(() => {
-        markdownFilePathArg = 'foo/bar///jar'
+        outputFilePathArg = 'foo/bar///jar'
         sinon.stub(libs, 'commandLineArgs').returns({
-          markdownFilePath: markdownFilePathArg
+          outputFilePath: outputFilePathArg
         })
         sinon.stub(path, 'normalize').returns('normalized-path')
       })
@@ -54,12 +51,12 @@ describe(TESTED_MODULE, () => {
         sinon.restore()
       })
       it('returns the normalized argument value', () => {
-        const result = mod.getMarkdownFilePath()
-        expect(path.normalize).to.have.been.calledWith(markdownFilePathArg)
+        const result = mod.getOutputFilePath()
+        expect(path.normalize).to.have.been.calledWith(outputFilePathArg)
         expect(result).to.equal('normalized-path')
       })
     })
-    describe('- when markdownFilePath argument not provided', () => {
+    describe('- when outputFilePath argument not provided', () => {
       beforeEach(() => {
         sinon.stub(libs, 'commandLineArgs').returns({
           someOtherPath: 'foobar'
@@ -69,7 +66,31 @@ describe(TESTED_MODULE, () => {
         sinon.restore()
       })
       it('throws error', () => {
-        expect(() => mod.getMarkdownFilePath()).to.throw('markdownFilePath argument not provided')
+        expect(() => mod.getOutputFilePath()).to.throw('outputFilePath argument not provided')
+      })
+    })
+  })
+  describe('#getConversionType', () => {
+    beforeEach(() => {
+      sinon.stub(libs, 'commandLineArgs').returns({
+        conversionType: 'md'
+      })
+    })
+    afterEach(() => sinon.restore())
+
+    describe('- when conversionType argument is provided', () => {
+      it('should return the provided conversion type', () => {
+        const results = mod.getConversionType()
+        expect(results).to.equal('md')
+      })
+    })
+    describe('- when conversionType argument is not provided', () => {
+      beforeEach(() => {
+        libs.commandLineArgs.returns({})
+      })
+      it('should return "md" conversion by default', () => {
+        const results = mod.getConversionType()
+        expect(results).to.equal('md')
       })
     })
   })
